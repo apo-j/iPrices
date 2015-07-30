@@ -1,0 +1,20 @@
+<ion-view view-title="登录" hide-back-button="true">
+    <ion-content scroll="true" class="" overflow-scroll="true">
+        <div class="login-form">
+            <div class="login-pad">
+                <form>
+                    <input type="email" placeholder="邮箱" ng-model="user.email" required="">
+                    <div class="seperator"></div>
+                    <input type="password" placeholder="密码" ng-model="user.password" required="">
+                    <input type="submit" value="登录" ng-click="signIn(user)">
+                </form>
+                <p class="text-center">
+                    <a ui-sref="home.account-lostpassword">忘记密码</a>
+                </p>
+                <p class="text-center">
+                    <a ui-sref="home.account-register">注册</a>
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,16 @@
+<ion-view view-title="注册">
+    <ion-content scroll="true" class="" overflow-scroll="true">
+        <div class="login-form">
+            <div class="login-pad">
+                <form>
+                    <input type="email" placeholder="邮箱" ng-model="user.email" required="">
+                    <div class="seperator"></div>
+                    <input type="password" placeholder="密码" ng-model="user.password" required="">
+                    <div class="seperator"></div>
+                    <input type="password" placeholder="再次输入密码" ng-model="user.passwordConfirmation" required="">
+                    <input type="submit" value="注册" ng-click="register(user)">
+                </form>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

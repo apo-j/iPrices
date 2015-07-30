@@ -1,0 +1,26 @@
+<ion-view view-title="资讯">
+  <ion-content class="news scroll-bg" scroll="true">
+    <ion-refresher
+            pulling-text="下拉刷新"
+            on-refresh="doRefresh()">
+    </ion-refresher>
+    <ion-list>
+        <ion-item class="has-content"
+                  collection-repeat="item in news"
+                  item-width="100%"
+                  item-height="50%"
+                  type="item-text-wrap" ui-sref="home.news-detail({id: item.id})">
+            <div class="item-body">
+                <img ng-src="{{item.image}}">
+                <div class="description">
+                    <h2>{{item.title}}</h2>
+                </div>
+            </div>
+        </ion-item>
+    </ion-list>
+      <ion-infinite-scroll
+              on-infinite="loadHistoryItems()"
+              distance="1%">
+      </ion-infinite-scroll>
+  </ion-content>
+</ion-view>

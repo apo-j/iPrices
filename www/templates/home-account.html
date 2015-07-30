@@ -1,0 +1,36 @@
+<ion-view cache-view="false" hide-back-button="true" view-title="我的">
+    <ion-nav-buttons side="right">
+        <button type="button" class="button button-clear button-positive" ng-click="logout()">
+            退出
+        </button>
+    </ion-nav-buttons>
+  <ion-content>
+      <ion-list class="list">
+          <ion-item class="item item-icon-left item-icon-right" type="item-text-wrap" ui-sref="home.account-favoris">
+              <i class="icon ion-ios-heart"></i>
+              我的收藏
+              <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>
+          <ion-item ng-if="canAddProduct()" class="item item-icon-left item-icon-right" type="item-text-wrap" ui-sref="home.account-addproduct">
+              <i class="icon ion-ios-upload"></i>
+              上传产品
+              <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>
+          <ion-item ng-if="canAddProduct()" class="item item-icon-left item-icon-right" type="item-text-wrap" ui-sref="home.account-productlist">
+              <i class="icon ion-ios-list"></i>
+              我的产品
+              <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>
+          <ion-item ng-if="canAdmin()" class="item item-icon-left item-icon-right" type="item-text-wrap" ui-sref="home.account-adminproduct">
+              <i class="icon ion-ios-gear"></i>
+              管理产品
+              <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>
+          <ion-item ng-if="canAdmin()" class="item item-icon-left item-icon-right" type="item-text-wrap" ui-sref="home.account-adminuser">
+              <i class="icon ion-ios-people"></i>
+              管理用户
+              <i class="icon ion-chevron-right icon-accessory"></i>
+          </ion-item>
+      </ion-list>
+  </ion-content>
+</ion-view>

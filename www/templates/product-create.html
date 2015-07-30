@@ -1,0 +1,75 @@
+<ion-view view-title="上传产品">
+    <ion-content scroll="true" class="scroll-bg" overflow-scroll="true">
+        <div class="row">
+            <div class="col" style="padding-bottom: 0;padding-top:0">
+                <button class="button button-block button-dark icon-right" style="margin:0;" ng-click="prevStep()" ng-hide="currentStep == 1">
+                    上一步
+                </button>
+            </div>
+            <div class="col" style="padding-bottom: 0;padding-top:0">
+                <button class="button button-block button-dark icon-right" style="margin:0;" ng-click="nextStep()" ng-hide="currentStep == 3">
+                    下一步
+                </button>
+            </div>
+        </div>
+        <ion-list>
+            <div class="list card" ng-if="currentStep == 1">
+                <div class="item item-divider">
+                    图片
+                    <span class="pull-right icon ion-ios-camera" style="font-size:30px" ng-click="selectImageSource()"></span>
+                </div>
+                <div class="item item-body" style="padding:0 7px 0 7px">
+                    <img ng-src="data:image/jpeg;base64,{{image}}" ng-repeat="image in product.images" style="with:33%">
+                </div>
+            </div>
+
+            <div class="list card" ng-if="currentStep == 2">
+                <label class="item item-input">
+                    <span class="input-label">产品名称</span>
+                    <input type="text" ng-model="product.title">
+                </label>
+                <div class="item item-input item-select">
+                    <div class="input-label">
+                        品牌
+                    </div>
+                    <select ng-model="product.brand" convert-to-number>
+                        <option value="{{brand.id}}" ng-repeat="brand in allBrands">{{brand.label}}</option>
+                        <option value="-1">其他</option>
+                    </select>
+                </div>
+                <label class="item item-input" ng-if="product.brand < 0">
+                    <input type="text" ng-model="product.brandLabel" placeholder="输入品牌">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">编号</span>
+                    <input type="text" ng-model="product.reference">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">系列</span>
+                    <input type="text" ng-model="product.collectionLabel">
+                </label>
+                <div class="row">
+                    <div class="col col-25">单品描述</div>
+                </div>
+                <div class="row">
+                    <textarea class="col" ng-model="product.description" rows="3" placeholder="输入单品描述"> </textarea>
+                </div>
+            </div>
+
+            <div class="list card" ng-if="currentStep == 3">
+                <div class="item item-divider">官方售价<span class="pull-right icon ion-plus-round" style="font-size: 30px" ng-click="addPrice()"></span></div>
+                <div class="item item-body">
+                    <div class="row" ng-repeat="price in product.prices">
+                        <input type="text" ng-model="price.country" placeholder="国家">
+                        <input type="text" ng-model="price.price" placeholder="价格">
+                    </div>
+                </div>
+            </div>
+            <div class="padding" ng-if="currentStep == 3">
+                <button class="button button-block button-dark icon-right ion-ios-upload-outline" ng-click="upload()">
+                    上传
+                </button>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

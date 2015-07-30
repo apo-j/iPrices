@@ -1,0 +1,47 @@
+<ion-view cache-view="false" view-title="管理用户">
+    <ion-content scroll="true" class="scroll-bg">
+        <div class="list">
+            <div class="item item-body">
+                <label class="item item-input">
+                    <input type="text" placeholder="Username" ng-model="criteria.username">
+                </label>
+                <label class="item item-input">
+                    <input type="text" placeholder="Email" ng-model="criteria.email">
+                </label>
+
+                <div class="item item-input item-select">
+                    {{criteria.role || 'Role'}}
+                    <select ng-model="criteria.role" convert-to-number>
+                        <option value="0">--</option>
+                        <option value="{{role.id}}" ng-repeat="role in roles">{{role.label}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item pull-right" ng-click="search(criteria)" style="color:#686868">
+                    <i class="icon ion-ios-search-strong"></i>
+                    搜索
+                </a>
+            </div>
+        </div>
+        <div class="card" collection-repeat="user in users">
+            <div class="item item-divider">
+                Email : {{user.email}}
+            </div>
+            <div class="item item-body">
+                <div class="item item-input">
+                    Username :  {{user.username}}
+                </div>
+                <div class="item item-input item-select">
+                    {{user.roleId || 'Role'}}
+                    <select ng-model="user.roleId" convert-to-number>
+                        <option value="{{role.id}}" ng-repeat="role in roles">{{role.label}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="item item-divider">
+                <button class="pull-right" ng-click="save(user)">提交</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

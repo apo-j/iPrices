@@ -1,0 +1,25 @@
+<ion-view>
+    <ion-nav-buttons side="right">
+        <button type="button" class="button button-clear button-positive icon ion-more" ng-click="share()"></button>
+    </ion-nav-buttons>
+    <ion-content class="news-details" ng-class="{loading: loading}" scroll="true" overflow-scroll="true">
+        <div ng-if="!loading">
+            <img class="news-head-img" ng-src="{{news.image}}">
+            <div class="news-area">
+                <h1 class="news-title">{{news.title}}</h1>
+                <h2 class="news-author">{{news.author}}</h2>
+                <div style="clear: both"></div>
+                <div class="news-content" ng-bind-html="news.content">
+                </div>
+            </div>
+        </div>
+        <div ng-if="loading">
+            <ion-spinner icon="bubbles" style="position:absolute;left:47%;top:47%"></ion-spinner>
+        </div>
+
+        <!--<div style="overflow:auto;height:100%;-webkit-overflow-scrolling:touch">-->
+            <!--<iframe data-tap-disabled="true" ng-src="{{news.url | trustedUrl}}">-->
+            <!--</iframe>-->
+        <!--</div>-->
+    </ion-content>
+</ion-view>

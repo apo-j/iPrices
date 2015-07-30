@@ -1,0 +1,23 @@
+<ion-view view-title="{{title}}">
+    <ion-nav-title>
+        {{title}}
+    </ion-nav-title>
+    <ion-content scroll="true" class="scroll-bg">
+        <ion-list >
+            <ion-item class="product has-content item-icon-right"
+                      collection-repeat="product in products"
+                      item-width="50%"
+                      item-height="60%"
+                      type="item-text-wrap" href="{{detailUrl}}{{product.id}}">
+                <div class="item-body">
+                    <img ng-src="{{product.images[0]}}">
+                    <div class="description">
+                        <h3>{{product.title}}</h3>
+                        <p>{{product.brandLabel}}</p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

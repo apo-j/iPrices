@@ -1,0 +1,55 @@
+<ion-view view-title="{{product.title}}">
+    <ion-nav-title>
+        {{product.title}}
+    </ion-nav-title>
+    <ion-content scroll="true" class="scroll-bg product" overflow-scroll="true">
+        <ion-slide-box show-pager="true">
+            <ion-slide style="width:100%;min-height:260px" ng-repeat="image in product.images">
+                <img ng-src="{{image}}" style="width:100%;height:100%">
+            </ion-slide>
+        </ion-slide-box>
+        <div class="head">
+            <h4>{{product.title | stringNotEmpty}}</h4>
+            <div class="seperator"></div>
+            <button type="button" class="button button-clear pull-right icon ion-ios-heart" style="color:#A41C31;" ng-click="addFavoris()">
+            </button>
+            <button type="button" class="button button-clear pull-right icon ion-thumbsup" style="color:#FFCB4F;" ng-click="like()">
+                <span>{{product.likeNumber}}</span>
+            </button>
+            <button type="button" class="button button-clear pull-right icon ion-share" style="color:#fff;" ng-click="share()">
+            </button>
+            <div class="clearfix"></div>
+        </div>
+        <ion-list>
+            <div class="">
+                <div class="item item-body" style="border:none;padding:0 5px 0 5px;">
+                    <div class="row">
+                        <div class="col col-25">品牌</div>
+                        <div class="col selectable">{{product.brandLabel | stringNotEmpty}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-25">编号</div>
+                        <div class="col selectable">{{product.reference | stringNotEmpty}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-25">系列</div>
+                        <div class="col selectable">{{product.collectionLabel | stringNotEmpty}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-25">单品描述</div>
+                        <div class="col selectable" ng-bind-html="product.description | stringNotEmpty"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="list card" ng-if="prices.length > 0">
+                <div class="item item-divider">全球官方售价</div>
+                <div class="item item-body" style="padding:0 7px 0 7px">
+                    <div class="row" ng-repeat="price in prices">
+                        <div class="col">{{price.country}}</div>
+                        <div class="col">{{price.price | stringNotEmpty}}</div>
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,14 @@
+
+2: dismiss keyboard and activate search  OK
+3: news page, cards collapse when image loading and not recover when loaded  OK
+
+1: 微信
+	1.1 咨询  -- 朋友圈 (网址，标题)
+	1.2 产品  -- 朋友圈 ()好友标题，编号，价格)
+2： 检测网络连接 on resume    OK
+3： 产品更新
+3： 随机产生广告 on resume 三分之一  OK
+4: 移除jQuery   OK
+
+1: Romove jquery OK
+4: DO NOT UPDATE lokijs, some bugs in it remove and removeWhere OK

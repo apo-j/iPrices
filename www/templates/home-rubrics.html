@@ -1,0 +1,11 @@
+<ion-view view-title="专栏">
+  <ion-content scroll="true" class="scroll-bg">
+    <ion-list>
+      <ion-item class="item-avatar item-icon-right item-stable rubric" collection-repeat="rubric in rubrics" type="item-text-wrap" ui-sref="home.rubrics-products({id: rubric.id})">
+        <img ng-src="{{rubric.imageUrl}}">
+        <h2>{{rubric.label}}</h2>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

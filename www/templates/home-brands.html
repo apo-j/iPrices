@@ -1,0 +1,30 @@
+<ion-view view-title="品牌" hide-nav-bar="true">
+  <div id="search-products" ng-submit="search()">
+    <form class="bar bar-header item-input-inset bar-stable" style="background-color: #444">
+        <span class="item-input-wrapper">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="search" placeholder="品牌, 名称, 编号等" ng-model="query.term">
+          <a ng-if="query.term.length"
+             class="button button-icon ion-close-circled input-button input-delete-btn"
+             ng-click="clearQuery()">
+          </a>
+        </span>
+      <button type="submit" class="button button-clear button-positive" ng-submit="search()" style="color:#fff !important;">
+        搜索
+      </button>
+    </form>
+  </div>
+  <ion-content scroll="true" class="brands">
+    <ion-list class="">
+      <ion-item class="item-stable brand" collection-repeat="brand in brands"
+                item-width="50%"
+                item-height="20%"
+                type="item-text-wrap" href="#/home/brands/{{brand.id}}">
+        <div class="item-body">
+          <img ng-src="{{brand.imageUrl}}">
+          <h2 class="">{{brand.label}}</h2>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
