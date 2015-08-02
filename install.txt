@@ -1,0 +1,1 @@
+set app icon: http://learn.ionicframework.com/formulas/adding-an-icon/
