@@ -38,25 +38,33 @@ angular.module('iPrices.controllers', [])
             $scope.news.unshiftRange(data.data);
         });
     }])
-    .controller('NewsDetailCtrl', ['$cordovaGoogleAnalytics', '$scope', '$stateParams', 'NewsSvc', '$ionicActionSheet', function ($cordovaGoogleAnalytics, $scope, $stateParams, NewsSvc, $ionicActionSheet) {
+    .controller('NewsDetailCtrl', ['$cordovaGoogleAnalytics', '$scope', '$stateParams', 'NewsSvc', '$ionicActionSheet','WeChatSvc','afConfig', function ($cordovaGoogleAnalytics, $scope, $stateParams, NewsSvc, $ionicActionSheet, WeChatSvc, afConfig) {
         $scope.loading = true;
 
         $scope.share = function(){
-            $ionicActionSheet.show({
+            var shareSheet = $ionicActionSheet.show({
                 buttons: [
-                    {text: '微信朋友圈'},
-                    {text: '发送给微信好友'}
+                    {text: '<b>分享至微信朋友圈<b>'},
+                    {text: '分享给微信好友'}
                 ],
+                titleText:'分享',
                 cancelText: '取消',
                 cancel: function () {
                     // add cancel code..
                 },
                 buttonClicked: function (index) {
-                    if (index == 0) {//timeline
-                        //todo
-                    } else {//session
-                        //todo
+                    var msg = {
+                        title: $scope.news.title || afConfig.appName,
+                        description: $scope.news.author,
+                        url: afConfig.shareRootUrl + 'news?id=' +$scope.news.id,
+                        thumb: null
                     }
+                    if (index == 0) {//timeline
+                        WeChatSvc.share(msg, WeChat.Scene.timeline);
+                    } else {//session
+                        WeChatSvc.share(msg, WeChat.Scene.session);
+                    }
+                    shareSheet();
                     return true;
                 }
             });
@@ -125,23 +133,31 @@ angular.module('iPrices.controllers', [])
 
     }])
 
-    .controller('ProductDetailCtrl', ['$cordovaGoogleAnalytics', '$scope', '$rootScope', '$stateParams', 'ProductsSvc', '$ionicSlideBoxDelegate', 'FavorisSvc', '$ionicPopup', '$state','$ionicActionSheet', function ($cordovaGoogleAnalytics, $scope, $rootScope, $stateParams, ProductsSvc, $ionicSlideBoxDelegate, FavorisSvc, $ionicPopup, $state, $ionicActionSheet) {
+    .controller('ProductDetailCtrl', ['$cordovaGoogleAnalytics', '$scope', '$rootScope', '$stateParams', 'ProductsSvc', '$ionicSlideBoxDelegate', 'FavorisSvc', '$ionicPopup', '$state','$ionicActionSheet', 'WeChatSvc', 'afConfig', function ($cordovaGoogleAnalytics, $scope, $rootScope, $stateParams, ProductsSvc, $ionicSlideBoxDelegate, FavorisSvc, $ionicPopup, $state, $ionicActionSheet, WeChatSvc, afConfig) {
         $scope.share = function(){
-            $ionicActionSheet.show({
+            var shareSheet = $ionicActionSheet.show({
                 buttons: [
-                    {text: '微信朋友圈'},
-                    {text: '发送给微信好友'}
+                    {text: '<b>分享至微信朋友圈<b>'},
+                    {text: '分享给微信好友'}
                 ],
+                titleText:'分享',
                 cancelText: '取消',
                 cancel: function () {
                     // add cancel code..
                 },
                 buttonClicked: function (index) {
-                    if (index == 0) {//timeline
-                        //todo
-                    } else {//session
-                        //todo
+                    var msg = {
+                        title: $scope.product.title || afConfig.appName,
+                        description: $scope.product.reference,
+                        url: afConfig.shareRootUrl + 'product?id=' +$scope.product.id,
+                        thumb: null
                     }
+                    if (index == 0) {//timeline
+                        WeChatSvc.share(msg, WeChat.Scene.timeline);
+                    } else {//session
+                        WeChatSvc.share(msg, WeChat.Scene.session);
+                    }
+                    shareSheet();
                     return true;
                 }
             });
@@ -495,7 +511,10 @@ angular.module('iPrices.controllers', [])
         $scope.detailUrl = "#/home/brands-products/";
         var begin = new Date();
         BrandsSvc.search($stateParams.term).then(function (data) {
-            console.log((new Date()) - begin);
+            //console.log((new Date()) - begin);
+            if(data.length <= 0){
+                $scope.searchNoResults = true;
+            }
             $scope.products = data;
         });
     }])

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.cjs.baodating" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>baodating</name>
+  <name>iPrices</name>
   <description>
     包打听为您打听全球顶级时尚奢侈品牌单价，分享各国折扣信息，提供品牌专卖店导航以及最新时尚资讯。
     </description>
@@ -19,6 +19,18 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  <platform name="ios">
+    <!-- iOS 7.0+ -->
+    <!-- iPhone / iPod Touch -->
+    <icon src="icons/ios/icon-60.png" width="60" height="60" />
+    <icon src="icons/ios/icon-60@2x.png" width="120" height="120" />
+    <icon src="icons/ios/icon-60@3x.png" width="180" height="180" />
+    <!-- iPad -->
+    <icon src="icons/ios/icon-76.png" width="76" height="76" />
+    <icon src="icons/ios/icon-76@2x.png" width="152" height="152" />
+    <icon src="icons/ios/icon-76@3x.png" width="152" height="152" />
+
+  </platform>
   <platform name="android">
     <icon src="resources/android/icon/drawable-ldpi-icon.png" density="ldpi"/>
     <icon src="resources/android/icon/drawable-mdpi-icon.png" density="mdpi"/>

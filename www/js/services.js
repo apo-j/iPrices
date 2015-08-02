@@ -194,7 +194,7 @@ angular.module('iPrices.services', [])
 
         $q.all([
             _deferredAuxiliary.promise.then(function (data) {
-                var rubrics = res.getCollection('rubric');
+                //var rubrics = res.getCollection('rubric');
                 var brands = res.getCollection('brand');
                 var roles = res.getCollection('role');
                 //var collections = res.getCollection('collection');
@@ -202,7 +202,7 @@ angular.module('iPrices.services', [])
                 var auxiliaryData = _.groupBy(data.data, function (item) {
                     return item.type;
                 })
-                rubrics.insert(auxiliaryData['rubric']);
+                //rubrics.insert(auxiliaryData['rubric']);
                 brands.insert(auxiliaryData['brand']);
                 roles.insert(auxiliaryData['role']);
                 //collections.insert(auxiliaryData['collection']);
@@ -298,6 +298,27 @@ angular.module('iPrices.services', [])
             }
             return deferred.promise;
         }
+        return res;
+    }])
+    .factory('WeChatSvc', ['$ionicPopup', function($ionicPopup){
+        var res = {};
+
+        res.share = function(msg, scene){
+            WeChat.share(msg, scene, function() {
+                //$ionicPopup.alert({
+                //    title: '分享成功',
+                //    template: '感谢您的支持！',
+                //    okText: '关闭'
+                //});
+            }, function(res) {
+                $ionicPopup.alert({
+                    title: '分享失败',
+                    template: '错误原因：' + res + '。',
+                    okText: '我知道了'
+                });
+            });
+        }
+
         return res;
     }])
     .factory('NewsSvc', ['$http', '$q', 'DataSvc', 'afConfig', function ($http, $q, DataSvc, afConfig) {
@@ -422,9 +443,11 @@ angular.module('iPrices.services', [])
             } else {
                 $http.get(afConfig.apiRootUrl + "products/" + id).then(function(data){
                     if(data.data.data){
+                        DataSvc.getCollection('products').insert(data.data.data);
                         deferred.resolve({data: data.data.data, status: 200});
+                    }else{
+                        deferred.reject({data: 'Not found', status: 404});
                     }
-                    deferred.reject({data: 'Not found', status: 404});
                 });
             }
 

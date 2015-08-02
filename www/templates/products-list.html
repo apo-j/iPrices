@@ -2,8 +2,11 @@
     <ion-nav-title>
         {{title}}
     </ion-nav-title>
-    <ion-content scroll="true" class="scroll-bg">
-        <ion-list >
+    <ion-content scroll="true" class="scroll-bg loading">
+        <div ng-if="searchNoResults" style="position:relative;left:25%;top:47%">
+            很遗憾，未搜到符合条件的结果
+        </div>
+        <ion-list ng-if="!searchNoResults">
             <ion-item class="product has-content item-icon-right"
                       collection-repeat="product in products"
                       item-width="50%"

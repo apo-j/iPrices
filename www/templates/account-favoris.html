@@ -1,6 +1,9 @@
 <ion-view cache-view="false" view-title="收藏">
-    <ion-content scroll="true" class="scroll-bg">
-        <ion-list >
+    <ion-content scroll="true" class="scroll-bg loading">
+        <div ng-if="favoris.length == 0" style="position:relative;left:33%;top:47%">
+            您尚未收藏任何产品
+        </div>
+        <ion-list ng-if="favoris.length > 0">
             <ion-item class="item-avatar item-stable product item-icon-right" collection-repeat="product in favoris" item-width="100%" item-height="15%" type="item-text-wrap" href="#/home/favoris-products/{{product.id}}">
                 <img ng-src="{{product.images[0]}}">
                 <h2>{{product.title}}</h2>

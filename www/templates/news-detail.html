@@ -4,7 +4,7 @@
     </ion-nav-buttons>
     <ion-content class="news-details" ng-class="{loading: loading}" scroll="true" overflow-scroll="true">
         <div ng-if="!loading">
-            <img class="news-head-img" ng-src="{{news.image}}">
+            <img id="news-head-img" class="news-head-img" ng-src="{{news.image}}">
             <div class="news-area">
                 <h1 class="news-title">{{news.title}}</h1>
                 <h2 class="news-author">{{news.author}}</h2>
