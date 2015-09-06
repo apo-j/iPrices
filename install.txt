@@ -1,1 +1,31 @@
 set app icon: http://learn.ionicframework.com/formulas/adding-an-icon/
+set splashscreen: http://learn.ionicframework.com/formulas/splash-screen/
+reset app name: http://stackoverflow.com/questions/238980/how-to-change-the-name-of-an-ios-app
+
+cordova plugin list
+cordova plugin remove ...
+
+
+1:
+ionic platform add ios
+ionic platform add android
+sudo npm install
+bower install
+
+2:
+add plugins:
+cordova plugin add cordova-plugin-admobpro
+cordova plugin add com.ionic.keyboard
+cordova plugin add com.wordsbaking.cordova.wechat --variable APP_ID=wx0cb0066522588a9c
+cordova plugin add cordova-plugin-console
+cordova plugin add cordova-plugin-device
+cordova plugin add cordova-plugin-whitelist
+cordova plugin add cordova-plugin-statusbar
+cordova plugin add cordova-plugin-splashscreen
+cordova plugin add cordova-plugin-network-information
+cordova plugin add cordova-plugin-google-analytics
+
+--to add
+cordova plugin add cordova-plugin-inappbrowser
+cordova plugin add cordova-plugin-camera
+cordova plugin add com.synconset.imagepicker

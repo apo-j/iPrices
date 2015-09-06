@@ -107,7 +107,7 @@ ion-tabs.tabs-color-active-energized .tab-item {
 [collection-repeat].has-content{
   border: none;
   .item-content{
-    padding:5px;
+    padding:0 0 2px 0;
     height:100%;
     .item-body{
       padding:1px;
@@ -229,6 +229,9 @@ ion-tabs.tabs-color-active-energized .tab-item {
     .item-body{
       padding:1px !important;
       height:100%;
+      &:nth-child(2n){
+        padding-right: 0 !important;
+      }
       img{
         position: absolute !important;
         width: 100%;
@@ -242,8 +245,9 @@ ion-tabs.tabs-color-active-energized .tab-item {
           transform: 			translateY(-50%);
           color:white;
           overflow: hidden;
-          font-size: 20px;
+          font-size: 17px;
           font-weight: bold;
+          line-height: 17px;
         }
     }
   }
@@ -281,8 +285,6 @@ ion-tabs.tabs-color-active-energized .tab-item {
 .brands .item.item-stable {
   border:none !important;
 }
-
-
 
 
 

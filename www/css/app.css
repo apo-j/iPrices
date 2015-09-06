@@ -7750,7 +7750,7 @@ ion-tabs.tabs-color-active-energized .tab-item {
 [collection-repeat].has-content {
   border: none; }
   [collection-repeat].has-content .item-content {
-    padding: 5px;
+    padding: 0 0 2px 0;
     height: 100%; }
     [collection-repeat].has-content .item-content .item-body {
       padding: 1px; }
@@ -7838,6 +7838,8 @@ ion-tabs.tabs-color-active-energized .tab-item {
   .brands .item-content .item-body {
     padding: 1px !important;
     height: 100%; }
+    .brands .item-content .item-body:nth-child(2n) {
+      padding-right: 0 !important; }
     .brands .item-content .item-body img {
       position: absolute !important;
       width: 100%;
@@ -7849,8 +7851,9 @@ ion-tabs.tabs-color-active-energized .tab-item {
       transform: translateY(-50%);
       color: white;
       overflow: hidden;
-      font-size: 20px;
-      font-weight: bold; }
+      font-size: 17px;
+      font-weight: bold;
+      line-height: 17px; }
 
 .loading > div.scroll {
   position: relative;

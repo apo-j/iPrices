@@ -22,7 +22,7 @@ angular.module('iPrices.controllers', [])
         $scope.loadHistoryItems = function () {
             $scope.currentPage++;
             if ($scope.currentPage > ($scope.news.length / 3)) {
-                $scope.currentPage = $scope.news.length / 3;
+                $scope.currentPage = Math.floor($scope.news.length / 3);
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             } else {
                 NewsSvc.fetch({page: $scope.currentPage, version: ''}).then(function (data) {
@@ -55,8 +55,8 @@ angular.module('iPrices.controllers', [])
                 buttonClicked: function (index) {
                     var msg = {
                         title: $scope.news.title || afConfig.appName,
-                        description: $scope.news.author,
-                        url: afConfig.shareRootUrl + 'news?id=' +$scope.news.id,
+                        description: $scope.news.author || '',
+                        url: afConfig.shareRootUrl + '/#/news?id=' +$scope.news.id,
                         thumb: null
                     }
                     if (index == 0) {//timeline
@@ -73,7 +73,7 @@ angular.module('iPrices.controllers', [])
         NewsSvc.get($stateParams.id).then(function (data) {
             $scope.news = data.data;
             $scope.loading = false;
-            //$cordovaGoogleAnalytics.trackEvent('News', 'View', $stateParams.id);
+            $cordovaGoogleAnalytics.trackEvent('News', 'View', $stateParams.id);
         }, function (reason) {
         });
 
@@ -92,8 +92,8 @@ angular.module('iPrices.controllers', [])
 
         //$cordovaGoogleAnalytics.trackEvent('Product', 'Category', $scope.category);
         ProductsSvc.getByCategory($scope.category, $stateParams.id).then(function (data) {
-            $scope.products = _.sortBy(data.data, function (brand) {
-                return brand;
+            $scope.products = _.sortBy(data.data, function (product) {
+                return -product.priority;
             });
 
             if (data.data instanceof Array && data.data[0]) {
@@ -148,8 +148,8 @@ angular.module('iPrices.controllers', [])
                 buttonClicked: function (index) {
                     var msg = {
                         title: $scope.product.title || afConfig.appName,
-                        description: $scope.product.reference,
-                        url: afConfig.shareRootUrl + 'product?id=' +$scope.product.id,
+                        description: "编号：" + $scope.product.reference,
+                        url: afConfig.shareRootUrl + '/#/product?id=' +$scope.product.id,
                         thumb: null
                     }
                     if (index == 0) {//timeline
@@ -165,33 +165,32 @@ angular.module('iPrices.controllers', [])
 
         ProductsSvc.get($stateParams.id).then(function (data) {
             $scope.product = data.data;
-            //$scope.prices = Object.keys(data.data.prices || {});
             $scope.prices = data.data.prices || [];
             $ionicSlideBoxDelegate.update();
-            //$cordovaGoogleAnalytics.trackEvent('Product', 'View', $stateParams.id);
+            $cordovaGoogleAnalytics.trackEvent('Product', 'View', $stateParams.id);
         });
 
         $scope.like = function () {
             ProductsSvc.addLike($scope.product).then(function (data) {
                 $scope.product.likeNumber = data.data;
                 ProductsSvc.updateLocal($scope.product);
-
+                $cordovaGoogleAnalytics.trackEvent('Product', 'Like', $scope.product.id);
             })
         }
 
         $scope.addFavoris = function () {
-            //$cordovaGoogleAnalytics.trackEvent('Favoris', 'Add', $stateParams.id);
+            //$cordovaGoogleAnalytics.trackEvent('Product', 'Favoris', $stateParams.id);
             FavorisSvc.add($scope.product).then(function (data) {
                 if (data.data === true) {
                     $ionicPopup.alert({
                         title: '提示',
-                        template: '<div style="text-align:center">您已收藏此产品</div>'
+                        template: '<div style="text-align:center">此产品已收藏</div>'
                     }).then(function (res) {
                     });
                 } else {
                     $ionicPopup.alert({
                         title: '提示',
-                        template: '<div style="text-align:center">您已成功收藏此产品</div>'
+                        template: '<div style="text-align:center">收藏成功</div>'
                     }).then(function (res) {
                     });
                     $rootScope.$broadcast("favoris.updated");
@@ -439,11 +438,15 @@ angular.module('iPrices.controllers', [])
 
         };
 
+        $scope.isSending = false;
         $scope.fetchPassword = function (user) {
+            $scope.isSending = true;
             AuthSvc.fetchPassword(user.email)
                 .then(function (response) {
+                    $scope.isSending = false;
                     $state.go('home.account-resetpassword');
                 }, function (reason) {
+                    $scope.isSending = false;
                     var alertPopup = $ionicPopup.alert({
                         title: '失败',
                         template: '<div style="text-align:center">用户名不存在</div>'
@@ -533,7 +536,7 @@ angular.module('iPrices.controllers', [])
         $scope.query = {term: undefined};
 
         $scope.search = function () {
-            //$cordovaGoogleAnalytics.trackEvent('Product', 'Search', $scope.query.term);
+            $cordovaGoogleAnalytics.trackEvent('Product', 'Search', $scope.query.term);
             $state.go('home.brands-searchresult', {term: $scope.query.term});
         }
 

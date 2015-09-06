@@ -8,11 +8,10 @@
 angular.module('iPrices', ['ionic', 'angular-storage', 'ngCordova', 'iPrices.controllers', 'iPrices.services', 'iPrices.filters', 'lokijs'])
     .constant('afConfig', config)
 
-    .run(function($ionicPlatform, $ionicPopup, $rootScope, afConfig, DataSvc, $state, $cordovaGoogleAnalytics, $cordovaNetwork, $cordovaStatusbar) {
+    .run(function($ionicPlatform, $cordovaSplashscreen, $ionicPopup, $rootScope, afConfig, DataSvc, $state, $cordovaGoogleAnalytics, $cordovaNetwork, $cordovaStatusbar) {
 
         //var outOfDateShown = false;
         //$rootScope.$on("VERSION.OUT.DATE", function(){
-        //
         //    if(!outOfDateShown){
         //        $ionicPopup.alert({
         //            title: '提示',
@@ -24,15 +23,14 @@ angular.module('iPrices', ['ionic', 'angular-storage', 'ngCordova', 'iPrices.con
         //});
 
       //init $rootScope utilities
-      $state.go('loading');
-
-      $rootScope.config = afConfig;
-      DataSvc.dataReady.then(function(){
-        $state.go('home.news');
-      }, function(){});
+      //$state.go('loading');
 
       $ionicPlatform.ready(function() {
 
+          DataSvc.dataReady.then(function(){
+              //$cordovaSplashscreen.hide();
+              $state.go('home.news');
+          }, function(){});
           // listen for Online event
           //$rootScope.$on('$cordovaNetwork:online', function(event, networkState){
           //
@@ -80,9 +78,9 @@ angular.module('iPrices', ['ionic', 'angular-storage', 'ngCordova', 'iPrices.con
             //  //overlap:true,
             //  autoShow: true
             //});
-
+            //
             //AdMob.prepareInterstitial( {adId:admobId.intersitial, autoShow:false} );
-
+            //
             //document.addEventListener('onAdLoaded', AdMob.showInterstitial);
 
         }

@@ -96,9 +96,9 @@ angular.module('iPrices.services', [])
         };
 
         service.response = function (response) {
-            if (response.config && response.headers['Current-Version'] !== afConfig.version){
-                $rootScope.$broadcast("VERSION.OUT.DATE");
-            }
+            //if (response.config && response.headers['Current-Version'] !== afConfig.version){
+            //    $rootScope.$broadcast("VERSION.OUT.DATE");
+            //}
 
             return response;
         };
@@ -332,7 +332,7 @@ angular.module('iPrices.services', [])
                     if (data.dataStatus === 1) {//no data
                         deferred.reject({data: 'No new data', status: 304});
                     } else {
-                        DataSvc.getCollection('news').insert(data.data);
+                        DataSvc.getCollection('news').insert(data.data.data);
                         deferred.resolve({data: data.data.data, status: 200});
                     }
                 }, function (e) {
